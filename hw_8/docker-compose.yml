@@ -1,0 +1,29 @@
+# docker-compose.yml
+version: '3.8' # Используем версию 3.8
+
+services:
+  # Основное приложение "Библиотека"
+  library-app:
+    build: . # Собирает образ из Dockerfile в текущей директории (hw_8)
+    ports:
+      - "3000:3000" # Порт 3000 основного приложения доступен снаружи на localhost:3000
+    environment:
+      - COUNTER_SERVICE_URL=http://service_counter:3000 # Указываем URL сервиса счётчика внутри сети compose
+    depends_on:
+      - service_counter # Убедимся, что service_counter запущен до library-app
+    restart: unless-stopped # Перезапускать, если не остановлен вручную
+
+  # Сервис счётчика просмотров
+  service_counter:
+    build: ./service_counter # Собирает образ из Dockerfile в папке service_counter
+    ports:
+      - "3001:3000" # Порт 3000 сервиса счётчика доступен снаружи на localhost:3001 (для отладки)
+    volumes:
+      # Создаём и монтируем именованный volume для хранения данных счётчика
+      # Именованные volume предпочтительнее для сохранения данных между перезапусками
+      - counter-data:/app/data # <-- Исправленная строка
+    restart: unless-stopped
+
+# Определяем именованный volume для хранения данных service_counter
+volumes:
+  counter-data:

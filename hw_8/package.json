@@ -1,0 +1,31 @@
+{
+  "name": "hw_8",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "pm2": "pm2 start index.js --name library-app",
+    "pm2-dev": "pm2 start index.js --name library-app --watch -f",
+    "pm2-stop": "pm2 stop library-app",
+    "pm2-delete": "pm2 delete library-app",
+    "pm2-restart": "pm2 restart library-app",
+    "pm2-logs": "pm2 logs library-app"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "node-fetch": "^3.3.2",
+    "pm2": "^6.0.8",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

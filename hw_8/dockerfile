@@ -1,0 +1,20 @@
+# Официальный образ Node.js
+FROM node:18-alpine
+
+# Рабочую директорию в контейнере
+WORKDIR /app
+
+# Файлы package.json и package-lock.json
+COPY package*.json ./
+
+# Установка зависимостей
+RUN npm install
+
+# Копия остальных исходных файлов
+COPY . .
+
+# Порт, который будет использовать приложение
+EXPOSE 3000
+
+# Команда для запуска приложения
+CMD [ "npm", "start" ]

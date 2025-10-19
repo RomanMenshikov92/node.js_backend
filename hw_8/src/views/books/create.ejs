@@ -1,0 +1,31 @@
+<%- include('../layouts/layout-start', { title: 'Добавить книгу' }) %>
+
+<h2>Добавить новую книгу</h2>
+
+<% if (locals.error) { %>
+  <div class="error-message"><%= error %></div>
+<% } %>
+
+<form method="POST" action="/books" class="book-form">
+  <label>
+    Название книги:<br />
+    <input type="text" name="title" value="<%= locals.book?.title || '' %>" required />
+  </label>
+
+  <label>
+    Автор:<br />
+    <input type="text" name="author" value="<%= locals.book?.author || '' %>" required />
+  </label>
+
+  <label>
+    Год издания:<br />
+    <input type="number" name="year" value="<%= locals.book?.year || '' %>" min="0" max="2025" required />
+  </label>
+
+  <div class="form-actions">
+    <button type="submit" class="button">Создать</button>
+    <a href="/books" class="button cancel">Отмена</a>
+  </div>
+</form>
+
+<%- include('../layouts/layout-end') %>
