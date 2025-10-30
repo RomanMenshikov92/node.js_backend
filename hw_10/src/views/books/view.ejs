@@ -1,0 +1,17 @@
+<%- include('../layouts/layout-start', { title: book.title }) %>
+
+<h2><%= book.title %></h2>
+<p><strong>Автор(ы):</strong> <%= book.authors %></p>
+<p><strong>Описание:</strong> <%= book.description %></p>
+<% if (typeof viewCount !== 'undefined') { %>
+  <p><em>Просмотров: <span id="view-count"><%= viewCount %></span></em></p>
+<% } else { %>
+  <p><em>Просмотров: <span id="view-count">N/A</span></em></p>
+<% } %>
+
+<div class="actions">
+  <a href="/books" class="button">← Назад к списку</a>
+  <a href="/books/<%= book.id %>/edit" class="button">✏️</a>
+</div>
+
+<%- include('../layouts/layout-end') %>
