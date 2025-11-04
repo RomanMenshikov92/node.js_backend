@@ -1,0 +1,38 @@
+{
+  "name": "hw_11",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "pm2": "pm2 start index.js --name library-app",
+    "pm2-dev": "pm2 start index.js --name library-app --watch -f",
+    "pm2-stop": "pm2 stop library-app",
+    "pm2-delete": "pm2 delete library-app",
+    "pm2-restart": "pm2 restart library-app",
+    "pm2-logs": "pm2 logs library-app"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "connect-mongo": "^5.1.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "mongoose": "^8.19.2",
+    "multer": "^2.0.2",
+    "node-fetch": "^3.3.2",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "pm2": "^6.0.8",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "dotenv": "^17.2.3",
+    "nodemon": "^3.1.10"
+  }
+}

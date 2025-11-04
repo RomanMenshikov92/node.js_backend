@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title || 'Библиотека' %></title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <header class="site-header">
+        <h1 class="header-title">Библиотека</h1>
+        <nav class="nav-container">
+          <% if (typeof user !== 'undefined' && user) { %>
+          <div class="nav-left">
+            <a href="/">Главная</a> |
+            <a href="/books">Книги</a> |
+            <a href="/books/create">Добавить книгу</a>
+          </div>
+          <div class="nav-middle"><span>Привет, <%= user.username %>!</span></div>
+          <div class="nav-right">
+            <a href="/api/user/me">Профиль</a> |
+            <a href="/api/user/logout">Выйти</a>
+          </div>
+          <% } else { %>
+          <div class="nav-left"></div>
+          <div class="nav-middle"></div>
+          <div class="nav-right"></div>
+          <% } %>
+        </nav>
+      </header>
+
+      <main class="site-main">

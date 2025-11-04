@@ -1,0 +1,27 @@
+<%- include('../layouts/layout-start', { title: 'Редактировать книгу' }) %>
+
+<h2>Редактировать книгу</h2>
+
+<form method="POST" action="/books/<%= book.id %>" class="book-form">
+  <label>
+    Название книги:<br />
+    <input type="text" name="title" value="<%= book.title %>" required />
+  </label>
+
+  <label>
+    Описание:<br />
+    <textarea name="description" required><%= book.description %></textarea>
+  </label>
+
+  <label>
+    Автор(ы):<br />
+    <input type="text" name="authors" value="<%= book.authors %>" required />
+  </label>
+
+  <div class="form-actions">
+    <button type="submit" class="button">Сохранить</button>
+    <a href="/books/<%= book.id %>" class="button cancel">Отмена</a>
+  </div>
+</form>
+
+<%- include('../layouts/layout-end') %>
