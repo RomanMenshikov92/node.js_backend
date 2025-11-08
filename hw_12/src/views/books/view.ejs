@@ -1,0 +1,49 @@
+<%- include('../layouts/layout-start', { title: book.title }) %>
+
+<h2><%= book.title %></h2>
+<p><strong>Автор(ы):</strong> <%= book.authors %></p>
+<p><strong>Описание:</strong> <%= book.description %></p>
+<% if (typeof viewCount !== 'undefined') { %>
+<p>
+  <em>Просмотров: <span id="view-count"><%= viewCount %></span></em>
+</p>
+<% } else { %>
+<p>
+  <em>Просмотров: <span id="view-count">N/A</span></em>
+</p>
+<% } %>
+
+<div class="actions">
+  <a href="/books" class="button">← Назад к списку</a>
+  <a href="/books/<%= book.id %>/edit" class="button">✏️</a>
+</div>
+
+<div id="comments-section">
+  <h3>Обсуждение книги</h3>
+  <div id="comments-list">
+    <!-- Комментарии будут загружены и добавлены сюда через JavaScript -->
+  </div>
+  <div id="comment-form-container">
+    <% if (typeof user !== 'undefined' && user) { %>
+      <form id="comment-form">
+        <input type="hidden" id="book-id" value="<%= book.id %>" />
+        <input type="hidden" id="username" value="<%= user.username %>" />
+        <label>
+          Ваш комментарий:
+          <textarea id="comment-text" name="text" required></textarea>
+        </label>
+        <button type="submit">Отправить</button>
+      </form>
+    <% } else { %>
+      <p>Чтобы оставить комментарий, <a href="/api/user/login">войдите</a> в систему.</p>
+    <% } %>
+  </div>
+</div>
+
+<div id="initial-comments-data" style="display: none;" data-comments="<%= JSON.stringify(comments || []).replace(/"/g, '&quot;') %>"></div>
+
+<!-- Подключаем Socket.IO + скрипт для комментариев клиентскую библиотеку -->
+<script src="/socket.io/socket.io.js"></script>
+<script src="/bookComments.js"></script>
+
+<%- include('../layouts/layout-end') %>

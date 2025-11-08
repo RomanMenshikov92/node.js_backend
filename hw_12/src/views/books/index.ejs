@@ -1,0 +1,32 @@
+<%- include('../layouts/layout-start', { title: 'Список книг' }) %>
+
+<h2>Список книг</h2>
+
+<% if (books && books.length > 0) { %>
+<ul class="book-list">
+  <% books.forEach(book => { %>
+  <li class="book-item">
+    <h3><a href="/books/<%= book.id %>"><%= book.title %></a></h3>
+    <p><strong>Автор(ы):</strong> <%= book.authors %></p>
+    <p><strong>Описание:</strong> <%= book.description %></p>
+    <% if (typeof book.viewCount !== 'undefined') { %>
+    <p>
+      <em>Просмотров: <span id="view-count"><%= book.viewCount %></span></em>
+    </p>
+    <% } else { %>
+    <p>
+      <em>Просмотров: <span id="view-count">N/A</span></em>
+    </p>
+    <% } %>
+    <div class="book-actions">
+      <a href="/books/<%= book.id %>/edit" class="button">✏️</a>
+      <form method="POST" action="/books/<%= book.id %>/delete" class="delete-form" onsubmit="return confirm('Удалить книгу?')">
+        <button type="submit" class="button delete-btn">🗑️</button>
+      </form>
+    </div>
+  </li>
+  <% }) %>
+</ul>
+<% } else { %>
+<p>Нет книг в библиотеке. <a href="/books/create" class="button">Добавьте первую!</a></p>
+<% } %> <%- include('../layouts/layout-end') %>
