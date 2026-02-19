@@ -35,3 +35,5 @@
 ## Блок 3: TypeScript
 
 3.1 [Принципы ООП. Solid](./hw_13/)
+
+3.2 [IoС и DI. Библиотека reflect-metadata](./hw_14/)
