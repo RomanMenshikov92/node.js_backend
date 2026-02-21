@@ -1,11 +1,11 @@
 // Сущность книги для приложения «Библиотека».
 export interface Book {
-  title: string;
-  description: string | null;
-  authors: string | null;
-  favorite?: boolean;
-  fileCover?: string | null;
-  fileName?: string | null;
-  fileBook?: string | null;
-  viewCount?: number;
+  readonly title: string;
+  readonly description: string | null;
+  readonly authors: string | null;
+  readonly favorite?: boolean;
+  readonly fileCover?: string | null;
+  readonly fileName?: string | null;
+  readonly fileBook?: string | null;
+  readonly viewCount?: number;
 }
