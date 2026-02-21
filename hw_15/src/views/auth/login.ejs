@@ -1,0 +1,23 @@
+<%- include('../layouts/layout-start', { title: 'Вход' }) %>
+
+<h2 class="title-form">Вход</h2>
+
+<% if (locals.error) { %>
+  <div class="error-message"><%= error %></div>
+<% } %>
+
+<form method="POST" action="/api/user/login" class="auth-form">
+  <label>
+    Имя пользователя:<br />
+    <input type="text" name="username" autocomplete="username" required />
+  </label>
+  <label>
+    Пароль:<br />
+    <input type="password" name="password" autocomplete="current-password" required />
+  </label>
+  <button type="submit">Войти</button>
+</form>
+
+<p class="switch-form">Еще нет аккаунта? <a href="/api/user/signup">Зарегистрируйтесь</a></p>
+
+<%- include('../layouts/layout-end') %>

@@ -1,0 +1,50 @@
+{
+  "name": "hw_15",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/app.js",
+  "type": "module",
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "start": "node dist/app.js",
+    "dev": "tsx watch app.ts",
+    "lint": "eslint src --ext .ts,.js",
+    "lint:fix": "eslint src --ext .ts,.js --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check src",
+    "check": "npm run lint && npm run format:check"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bcryptjs": "^3.0.0",
+    "@types/connect-mongo": "^3.1.6",
+    "@types/express": "^5.0.6",
+    "@types/express-session": "^1.18.2",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^25.3.0",
+    "@types/passport": "^1.0.17",
+    "@types/passport-local": "^1.0.38",
+    "@types/socket.io": "^3.0.2",
+    "@typescript-eslint/eslint-plugin": "^8.56.0",
+    "@typescript-eslint/parser": "^8.56.0",
+    "eslint": "^10.0.0",
+    "ts-node": "^10.9.2",
+    "tsc-watch": "^7.2.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "connect-mongo": "^6.0.0",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "inversify": "^7.11.0",
+    "mongoose": "^9.2.1",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "reflect-metadata": "^0.2.2",
+    "socket.io": "^4.8.3"
+  }
+}
