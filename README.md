@@ -37,3 +37,5 @@
 3.1 [Принципы ООП. Solid](./hw_13/)
 
 3.2 [IoС и DI. Библиотека reflect-metadata](./hw_14/)
+
+3.3 [Перенос и интеграция JavaScript проекта на TypeScript](./hw_15/)
