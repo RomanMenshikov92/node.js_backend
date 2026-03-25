@@ -5,7 +5,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 /**
- * Подключение к базе данных MongoDB
+ * Асинхронная функция для подключения к базе данных MongoDB
+ * @async
+ * @function connectDB
+ * @returns {Promise<void>} Промис, который разрешается при успешном подключении или отклоняется при ошибке
+ * @throws {Error} Выбрасывает ошибку и завершает процесс в случае неудачного подключения
  */
 const connectDB = async (): Promise<void> => {
   try {

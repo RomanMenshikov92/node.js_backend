@@ -1,5 +1,6 @@
-// Сущность книги для приложения «Библиотека».
+// интерфейс "книга"
 export interface Book {
+  _id: any;
   readonly title: string;
   readonly description: string | null;
   readonly authors: string | null;

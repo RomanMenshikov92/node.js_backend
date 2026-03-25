@@ -7,10 +7,10 @@ import type { Book } from "../types/book.type.js";
 abstract class BooksRepository {
   /**
    * Создание новой книги.
-   * @param {Book} book - Данные книги для создания.
-   * @returns {Promise<void>}
+   * @param {Omit<Book, '_id'>} book - Данные книги для создания (без _id).
+   * @returns {Promise<Book>} Созданная книга (с _id).
    */
-  abstract createBook(book: Book): Promise<void>;
+  abstract createBook(book: Omit<Book, '_id'>): Promise<Book>;
 
   /**
    * Получение книги по уникальному идентификатору.
@@ -28,16 +28,23 @@ abstract class BooksRepository {
   /**
    * Обновление существующей книги.
    * @param {string} id - Уникальный идентификатор книги.
-   * @param {Book} updatedBook - Обновлённые данные книги.
-   * @returns {Promise<void>}
+   * @param {Partial<Omit<Book, '_id'>>} updatedBook - Обновлённые данные книги (без _id).
+   * @returns {Promise<Book | null>} Обновленная книга или null, если не найдена.
    */
-  abstract updateBook(id: string, updatedBook: Book): Promise<void>;
+  abstract updateBook(id: string, updatedBook: Partial<Omit<Book, '_id'>>): Promise<Book | null>;
 
   /**
    * Удаление книги по уникальному идентификатору.
    * @param {string} id - Уникальный идентификатор книги.
-   * @returns {Promise<void>}
+   * @returns {Promise<boolean>} true, если удалено, иначе false.
    */
-  abstract deleteBook(id: string): Promise<void>;
+  abstract deleteBook(id: string): Promise<boolean>;
+
+  /**
+   * Увеличение счётчика просмотров книги по её ID.
+   * @param {string} id - Уникальный идентификатор книги.
+   * @returns {Promise<Book | null>} Обновлённая книга с новым значением счётчика или null, если не найдена.
+   */
+  abstract incrementViewCount(id: string): Promise<Book | null>;
 }
 export default BooksRepository;

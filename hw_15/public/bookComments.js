@@ -1,3 +1,5 @@
+// public/bookComments.js
+
 /**
  * Обработчик события DOMContentLoaded для инициализации функционала комментариев на странице книги.
  * Подключается к серверу через Socket.IO, загружает начальные комментарии с сервера,
@@ -25,6 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let initialComments = [];
   if (initialCommentsDataElement) {
     try {
+      // Используем decodeURIComponent для безопасного восстановления кавычек, если сервер их кодировал
+      // const jsonString = decodeURIComponent(initialCommentsDataElement.getAttribute("data-comments"));
+      // Однако, в EJS мы использовали .replace(/"/g, '&quot;'), поэтому используем replace
       const jsonString = initialCommentsDataElement.getAttribute("data-comments").replace(/&quot;/g, '"');
       initialComments = JSON.parse(jsonString);
     } catch (e) {
@@ -39,6 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   socket.on("loadComments", (comments) => {
+    // Очищаем список перед загрузкой новых комментариев
     commentsList.innerHTML = "";
     comments.forEach(addCommentToDOM);
   });
@@ -51,7 +57,9 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     const text = commentText.value.trim();
     if (text) {
+      // Отправляем комментарий на сервер через Socket.IO
       socket.emit("newComment", { bookId, text, username });
+      // Очищаем поле ввода
       commentText.value = "";
     }
   });
@@ -63,17 +71,21 @@ document.addEventListener("DOMContentLoaded", () => {
    *                           _id может отсутствовать для временных комментариев при отправке.
    */
   function addCommentToDOM(comment) {
+    // Проверяем, существует ли уже элемент с таким ID
     if (comment._id && document.querySelector(`[data-comment-id="${comment._id}"]`)) {
       return;
     }
 
     const commentElement = document.createElement("div");
+    // Устанавливаем уникальный атрибут для идентификации
     commentElement.setAttribute("data-comment-id", comment._id || `temp-${Date.now()}`);
     commentElement.className = "comment-item";
+    // Формируем HTML содержимого комментария
     commentElement.innerHTML = `
       <p><strong>${comment.username}</strong> <em>(${new Date(comment.timestamp).toLocaleString()})</em></p>
       <p>${comment.text}</p>
     `;
+    // Добавляем комментарий в список
     commentsList.appendChild(commentElement);
   }
 });
