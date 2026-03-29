@@ -17,7 +17,7 @@ import errorMiddleware from './src/middleware/error.middleware.js';
 // Инициализация Express-приложения
 const app: Express = express();
 // Порт
-const PORT: string | 3000 = process.env.PORT || 3000;
+const PORT: number = parseInt(process.env.PORT || '3000', 10);
 
 // Подключение к БД
 connectDB();
